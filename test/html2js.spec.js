@@ -188,7 +188,8 @@ describe('preprocessors html2js', function() {
       beforeEach(function() {
         process = createPreprocessor({
           maps: {
-            'areas/path/modules/app/': 'app/'
+            'areas/path/modules/app/': 'app/',
+            "areas/common/modules/**/templates/": 'app/{0}/'
           }
         });
       });
@@ -199,6 +200,16 @@ describe('preprocessors html2js', function() {
         HTML = '<html></html>';
         process(HTML, file, function(processedContent) {
           expect(processedContent).to.defineModule('app/file.cshtml').and.to.defineTemplateId('app/file.cshtml').and.to.haveContent(HTML);
+          done();
+        });
+      });
+
+      it('resolves correct path for regex (globstar) map', function(done) {
+        var HTML, file;
+        file = new File('/base/areas/common/modules/blah1/templates/file.cshtml');
+        HTML = '<html></html>';
+        process(HTML, file, function(processedContent) {
+          expect(processedContent).to.defineModule('app/blah1/file.cshtml').and.to.defineTemplateId('app/blah1/file.cshtml').and.to.haveContent(HTML);
           done();
         });
       });
