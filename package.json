@@ -1,5 +1,5 @@
 {
-  "name": "karma-ng-html2js-preprocessor",
+  "name": "karma-ng-html2js-custom-preprocessor",
   "version": "0.2.0",
   "description": "A Karma plugin. Compile AngularJS templates to JavaScript on the fly.",
   "main": "lib/index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/karma-runner/karma-ng-html2js-preprocessor.git"
+    "url": "git://github.com/sjdweb/karma-ng-html2js-custom-preprocessor.git"
   },
   "keywords": [
     "karma-plugin",
@@ -17,7 +17,7 @@
     "angular",
     "html2js"
   ],
-  "author": "Vojta Jina <vojta.jina@gmail.com>",
+  "author": "Sean Drumm <sean.drumm@gmail.com>",
   "dependencies": {},
   "devDependencies": {
     "chai": "^3.3.0",
@@ -40,6 +40,7 @@
   },
   "license": "MIT",
   "contributors": [
+    "Vojta Jina <vojta.jina@gmail.com>",
     "Friedel Ziegelmayer <dignifiedquire@gmail.com>",
     "Friedel Ziegelmayer <friedel.ziegelmayer@gmail.com>",
     "dignifiedquire <dignifiedquire@gmail.com>",

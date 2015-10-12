@@ -8,7 +8,7 @@ module.exports = function (grunt) {
       },
       unit: {
         src: [
-          'test/**/*.spec.coffee'
+          'test/**/*.spec.js'
         ]
       }
     },
@@ -43,7 +43,7 @@ module.exports = function (grunt) {
     bump: {
       options: {
         commitMessage: 'chore: release v%VERSION%',
-        pushTo: 'upstream',
+        pushTo: 'origin',
         commitFiles: [
           'package.json',
           'CHANGELOG.md'
