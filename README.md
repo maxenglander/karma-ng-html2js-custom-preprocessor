@@ -1,9 +1,11 @@
 # karma-ng-html2js-preprocessor
 
+[Blog post on this fork](https://seandrumm.co.uk/testing-directives-with-server-side-templates/)
+
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/karma-runner/karma-ng-html2js-preprocessor)
  [![npm version](https://img.shields.io/npm/v/karma-ng-html2js-preprocessor.svg?style=flat-square)](https://www.npmjs.com/package/karma-ng-html2js-preprocessor) [![npm downloads](https://img.shields.io/npm/dm/karma-ng-html2js-preprocessor.svg?style=flat-square)](https://www.npmjs.com/package/karma-ng-html2js-preprocessor)
 
-[![Build Status](https://img.shields.io/travis/karma-runner/karma-ng-html2js-preprocessor/master.svg?style=flat-square)](https://travis-ci.org/karma-runner/karma-ng-html2js-preprocessor) [![Dependency Status](https://img.shields.io/david/karma-runner/karma-ng-html2js-preprocessor.svg?style=flat-square)](https://david-dm.org/karma-runner/karma-ng-html2js-preprocessor) [![devDependency Status](https://img.shields.io/david/dev/karma-runner/karma-ng-html2js-preprocessor.svg?style=flat-square)](https://david-dm.org/karma-runner/karma-ng-html2js-preprocessor#info=devDependencies)
+[![Build Status](https://travis-ci.org/sjdweb/karma-ng-html2js-custom-preprocessor.svg?branch=master)](https://travis-ci.org/sjdweb/karma-ng-html2js-custom-preprocessor)
 
 > Preprocessor for converting HTML files to [AngularJS 1.x](http://angularjs.org/) templates.
 
@@ -25,7 +27,7 @@ $ npm install karma-ng-html2js-preprocessor --save-dev
 module.exports = function(config) {
   config.set({
     preprocessors: {
-      '**/*.html': ['ng-html2js']
+      'Areas/Common/Modules/**/*.cshtml': ['ng-html2js-custom'],
     },
 
     files: [
@@ -43,29 +45,18 @@ module.exports = function(config) {
     // ]
 
     ngHtml2JsPreprocessor: {
-      // strip this from the file path
-      stripPrefix: 'public/',
-      stripSuffix: '.ext',
-      // prepend this to the
-      prependPrefix: 'served/',
-
-      // or define a custom transform function
-      // - cacheId returned is used to load template
-      //   module(cacheId) will return template at filepath
-      cacheIdFromPath: function(filepath) {
-        // example strips 'public/' from anywhere in the path
-        // module(app/templates/template.html) => app/public/templates/template.html
-        var cacheId = filepath.strip('public/', '');
-        return cacheId;
+      maps: {
+        'Areas/Common/Modules/**/Templates/': 'common/{0}/'
       },
+      fileNameFormatter: function(fileName) {
+        if (fileName.indexOf('.cshtml') > -1) {
+          // Camel to file case
+          var formatted = fileName.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+          return formatted.replace('.cshtml', '').toLowerCase();
+        }
 
-      // - setting this option will create only a single module that contains templates
-      //   from all the files, so you can load them all with module('foo')
-      // - you may provide a function(htmlPath, originalPath) instead of a string
-      //   if you'd like to generate modules dynamically
-      //   htmlPath is a originalPath stripped and/or prepended
-      //   with all provided suffixes and prefixes
-      moduleName: 'foo'
+        return fileName;
+      }
     }
   })
 }
