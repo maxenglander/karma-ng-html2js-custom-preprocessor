@@ -209,7 +209,7 @@ describe('preprocessors html2js', function() {
         file = new File('/base/areas/common/modules/BlAh1/templates/file.cshtml');
         HTML = '<html></html>';
         process(HTML, file, function(processedContent) {
-          expect(processedContent).to.defineModule('app/blah1/file.cshtml').and.to.defineTemplateId('app/blah1/file.cshtml').and.to.haveContent(HTML);
+          expect(processedContent).to.defineModule('app/BlAh1/file.cshtml').and.to.defineTemplateId('app/BlAh1/file.cshtml').and.to.haveContent(HTML);
           done();
         });
       });
