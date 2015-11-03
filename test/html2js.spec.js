@@ -189,7 +189,8 @@ describe('preprocessors html2js', function() {
         process = createPreprocessor({
           maps: {
             'areas/path/modules/app/': 'app/',
-            "Areas/Common/Modules/**/Templates/": 'app/{0}/'
+            'Areas/Common/Modules/**/Templates/': 'app/{0}/',
+            'Areas/FunStuff/Modules/**/Templates/': { path: 'fun-stuff/{0}/', postProcessor: function(i) { return i.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase(); } }
           }
         });
       });
@@ -210,6 +211,16 @@ describe('preprocessors html2js', function() {
         HTML = '<html></html>';
         process(HTML, file, function(processedContent) {
           expect(processedContent).to.defineModule('app/BlAh1/file.cshtml').and.to.defineTemplateId('app/BlAh1/file.cshtml').and.to.haveContent(HTML);
+          done();
+        });
+      });
+
+      it('calls a map postProcessor function correctly', function(done) {
+        var HTML, file;
+        file = new File('/base/areas/FunStuff/modules/FunComponent/templates/file.cshtml');
+        HTML = '<html></html>';
+        process(HTML, file, function(processedContent) {
+          expect(processedContent).to.defineModule('fun-stuff/fun-component/file.cshtml').and.to.defineTemplateId('fun-stuff/fun-component/file.cshtml').and.to.haveContent(HTML);
           done();
         });
       });
