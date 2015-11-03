@@ -1,6 +1,6 @@
 {
   "name": "karma-ng-html2js-custom-preprocessor",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "A Karma plugin. Compile AngularJS templates to JavaScript on the fly.",
   "main": "lib/index.js",
   "scripts": {

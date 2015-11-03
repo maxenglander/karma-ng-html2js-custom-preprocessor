@@ -1,3 +1,9 @@
+<a name="0.2.6"></a>
+## [0.2.6](https://github.com/sjdweb/karma-ng-html2js-custom-preprocessor/compare/v0.2.5...v0.2.6) (2015-11-03)
+
+
+
+
 <a name="0.2.5"></a>
 ## [0.2.5](https://github.com/sjdweb/karma-ng-html2js-custom-preprocessor/compare/v0.2.4...v0.2.5) (2015-10-13)
 
